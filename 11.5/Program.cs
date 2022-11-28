@@ -1,32 +1,48 @@
 ﻿using System.Text.RegularExpressions;
 
+string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+StreamWriter triqualog = new StreamWriter(desktopPath + "/tri_qua_log.txt");
+StreamWriter generallog = new StreamWriter(desktopPath + "/general_log.txt");
 Random rnd = new();
-for (int i = 1; i < 4; i++)
+for (int i = 1; i < 6; i++)
 {
     int[] arr0 = { rnd.Next(-20, 20), rnd.Next(-20, 20), rnd.Next(-20, 20) };
     int[] arr1 = { rnd.Next(-20, 20), rnd.Next(-20, 20), rnd.Next(-20, 20), rnd.Next(-20, 20) };
-    int[] arr2 = { rnd.Next(-20, 20)};
+    int[] arr2 = { rnd.Next(-20, 20) };
 
     try
     {
         Triangle tri = new(arr0);
     }
-    catch { Console.WriteLine($"tri сatch в {i} цикле") ; }
+    catch(TriangleException) 
+    { 
+        triqualog.WriteLine(DateTime.Now + $" tri сatch в {i} цикле");
+        generallog.WriteLine(DateTime.Now + $" tri сatch в {i} цикле");
+    }
 
 
     try
     {
         Quadrangle qua = new(arr1);
     }
-    catch { Console.WriteLine($"qua сatch в {i} цикле"); }
+    catch (QuadrangleException)
+    { 
+        triqualog.WriteLine(DateTime.Now + $" qua сatch в {i} цикле");
+        generallog.WriteLine(DateTime.Now + $" qua сatch в {i} цикле");
+    }
 
     try
     {
         Circle cir = new(arr2);
     }
-    catch { Console.WriteLine($"cir сatch в {i} цикле"); }
-
+    catch(CircleException) 
+    { 
+        generallog.WriteLine(DateTime.Now + $" cir сatch в {i} цикле"); 
+    }
 }
+triqualog.Close();
+generallog.Close();
+
 
 
 class Triangle
