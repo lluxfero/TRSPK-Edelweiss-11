@@ -14,10 +14,10 @@ for (int i = 1; i < 6; i++)
     {
         Triangle tri = new(arr0);
     }
-    catch(TriangleException) 
+    catch(TriangleException ex) 
     { 
-        triqualog.WriteLine(DateTime.Now + $" tri сatch в {i} цикле");
-        generallog.WriteLine(DateTime.Now + $" tri сatch в {i} цикле");
+        triqualog.WriteLine(DateTime.Now + $" {ex.Message}: {ex.Parameters[0]} {ex.Parameters[1]} {ex.Parameters[2]}");
+        generallog.WriteLine(DateTime.Now + $" {ex.Message}: {ex.Parameters[0]} {ex.Parameters[1]} {ex.Parameters[2]}");
     }
 
 
@@ -25,19 +25,19 @@ for (int i = 1; i < 6; i++)
     {
         Quadrangle qua = new(arr1);
     }
-    catch (QuadrangleException)
+    catch (QuadrangleException ex)
     { 
-        triqualog.WriteLine(DateTime.Now + $" qua сatch в {i} цикле");
-        generallog.WriteLine(DateTime.Now + $" qua сatch в {i} цикле");
+        triqualog.WriteLine(DateTime.Now + $" {ex.Message}: {ex.Parameters[0]} {ex.Parameters[1]} {ex.Parameters[2]} {ex.Parameters[3]}");
+        generallog.WriteLine(DateTime.Now + $" {ex.Message}: {ex.Parameters[0]} {ex.Parameters[1]} {ex.Parameters[2]} {ex.Parameters[3]}");
     }
 
     try
     {
         Circle cir = new(arr2);
     }
-    catch(CircleException) 
+    catch(CircleException ex) 
     { 
-        generallog.WriteLine(DateTime.Now + $" cir сatch в {i} цикле"); 
+        generallog.WriteLine(DateTime.Now + $" {ex.Message}: {ex.Parameters[0]}"); 
     }
 }
 triqualog.Close();
